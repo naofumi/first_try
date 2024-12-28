@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+  <link rel="stylesheet" href="/src/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hotwire side</title>
+  <script src="/src/application.js" type="module"></script>
+</head>
+<body>
+<turbo-frame id="my-turbo-frame">
+  <div class="hotwire">
+    <div data-controller="greetings">
+      <p>This is the hotwire-side</p>
+      <button data-action="click->greetings#greet">Click for Greetings</button>
+      <p data-greetings-target="output"></p>
+    </div>
+    <a href="/about.html">Hotwire About Page</a>
+  </div>
+</turbo-frame>
+
+</body>
+</html>
