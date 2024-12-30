@@ -11,7 +11,7 @@ export default function AboutPage() {
     })
   }, [])
   return <div>
-    <h1>Hotwire About Page</h1>
+    <h1>Container</h1>
     <div className="hotwire-container">
       <turbo-frame src={`${viteHotwireHost}${pathAndQuery}`} id="my-turbo-frame"></turbo-frame>
     </div>

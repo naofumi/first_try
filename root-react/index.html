@@ -1,13 +1,22 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Micro Frontend</title>
-    <script type="module" src="/src/main.jsx"></script>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Micro Frontend</title>
+  <script type="module" src="/src/main.jsx"></script>
+</head>
+<body>
+<div id="root"></div>
+<div id="loading-screen"></div>
+<script>
+  const loadingScreen = document.getElementById('loading-screen')
+  window.addEventListener('load', () => {
+    loadingScreen.animate(
+      {opacity: [1, 0], visibility: 'hidden'},
+      {duration: 200, delay: 0, easing: 'ease-in', fill: 'forwards'})
+  })
+</script>
+</body>
 </html>

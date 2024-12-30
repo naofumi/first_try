@@ -11,9 +11,6 @@ export default function IndexPage() {
     loadRemoteAssets({
       manifestUrl: `${viteReactHost}/.vite/manifest.json`
     })
-  }, [])
-
-  useEffect(() => {
     loadRemoteAssets({
       manifestUrl: `${viteHotwireHost}/.vite/manifest.json`
     })
@@ -21,11 +18,12 @@ export default function IndexPage() {
 
   return (
     <>
-      <h1>React side</h1>
+      <h1>Micro Frontend container</h1>
+      <h2>React side</h2>
       <div className="react-container">
         <div id="root-react"></div>
       </div>
-      <h1>Hotwire side</h1>
+      <h2>Hotwire side</h2>
       <div className="hotwire-container">
         <turbo-frame src={`${viteHotwireHost}${pathAndQuery}`}
                      id="my-turbo-frame"></turbo-frame>

@@ -35,6 +35,13 @@
   h1 {
     font-size: 3.2em;
     line-height: 1.1;
+    color: orangered;
+  }
+
+  h2 {
+    font-size: 2.4em;
+    line-height: 1.1;
+    color: orangered;
   }
 
   #app {

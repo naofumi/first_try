@@ -10,7 +10,7 @@ export default function DetailPage() {
     })
   }, [])
   return <div>
-    <h1>React Detail Page</h1>
+    <h1>Container</h1>
     <div className="react-container">
       <div id="root-react"></div>
     </div>

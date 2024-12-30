@@ -1,8 +1,26 @@
 # Micro Frontend Study
 
-This is a trial to get the feel of Micro Frontends. It is based on the following article. 
+This is a test website for studying Micro Frontends. It is based on the following article, but much more simplified. 
 
 [Micro Frontends are described in this martinfowler.com article](https://martinfowler.com/articles/micro-frontends.html#TheExampleInDetail)
+
+## What is a Micro Frontend
+
+Wikipedia defines Micro frontends as the following;
+* Each micro frontend is independently developed. 
+* It is for client-side single-page applications written in JavaScript.
+* Tools are module federation (webpack), libraries like Single-SPA, Web Components, or iframes.
+
+Some resources
+* [micro-frontends.org](https://micro-frontends.org)
+* [The Truth Behind Micro Frontends: Insights from Real Case Studies](https://www.bitovi.com/blog/the-truth-behind-micro-frontends-insights-from-real-case-studies)
+
+There are many examples that claim to be Micro frontends but do not satisfy the first requirement that each micro frontend must be independently developed and deployed.
+Importantly, if the container application needs to be rebuilt (or rerun if you are in development), then my understanding is that it is not a micro frontend since deployment is no longer independent.
+
+Moreover, vertically split micro frontends do provide the same benefits. 
+However, the technology is extremely old, and it seems odd to [tout this as a new development](https://vercel.com/blog/how-vercel-adopted-microfrontends).
+Here, we will only consider horizontally split micro frameworks.
 
 ## Gist of what we did
 
@@ -24,6 +42,8 @@ In practice, we designed this example so that each application can be developed 
 we can run it without running the others.
 In particular, we want to avoid [build-time integration](https://martinfowler.com/articles/micro-frontends.html#Build-timeIntegration). 
 
+As mentioned in the article, one hallmark is that neither the component application nor the micro-frontends pull in each other as build dependencies.
+
 ## How to get it running
 
 1. CD into the "root" project. Build it with `npm run build`. Then start the server with `npm run preview`. Leave this running.
@@ -32,8 +52,8 @@ In particular, we want to avoid [build-time integration](https://martinfowler.co
 4. Access the "root" project. This should pull in files from the "react-side", "hotwire-side" and display the page. 
 
 Notes: 
-For integration testing where you load in the "react-side" and "hotwire-side" into the "root" project, you can only use production builds of the "react-side" and "hotwire-side".
-In other words, the development server versions of "react-side" and "hotwire-side" cannot be used in integration.
+For integration testing where you load in the "react-side" and "hotwire-side" into the "root" project, you must use production builds of the "react-side" and "hotwire-side".
+In other words, the development server versions of "react-side" and "hotwire-side" should be used for independent development of each micro-frontend but cannot be used in integration.
 
 ## Setup notes
 
@@ -59,27 +79,26 @@ When this JavaScript is loaded in the "container" application,
 it is inserted into the `root#react-root` element in `index.html`. 
 CSS is also loaded.
 
-The build also generates a manifest file so that the "root" application can always pull the latest versions.
-
-This is how the React side is displayed when working inside this micro frontend.
-
-Convenience methods are available to simplify this.
+The build will generate a manifest file so that the "root" application can look up the filenames of the latest versions.
 
 ### Hotwire side
 
 Hotwire is a combination of HTML and JavaScript. We need to pull in both. 
 
-The "root" container application will pull in HTML from the "hotwire-side" applications using `turbo-frames`. 
+The "root" container application will pull in HTML from the "hotwire-side" applications using `turbo-frames`.
+This will require CORS settings, which are provided in `vercel.json` for Vercel deployment.
 The container application will also pull in the JavaScript and CSS from the "hotwire-side" application. 
 
-The build also generates a manifest file so that the "root" application can always pull the latest versions.
-
-Convenience methods are available to simplify this.
+The build will generate a manifest file so that the "root" application can look up the filenames of the latest versions.
 
 ### Root: Container app
 
-To ensure that we always use the latest micro frontend versions, we use digests. 
-The root application has convenience methods to read manifest files and request the latest files.
+This container application will pull in the files required for showing the "react-side"
+and the "hotwire-side" micro-frontends.
+It will first read the manifest files from the frontends and request the latest file versions. 
+
+The container application has an elementary client-side router to switch between pages depending on the browser URL.
+Each page will pull in the micro-frontends that it needs.
 
 In addition to the vanilla JavaScript version of the root application, we also have a React version ("root-react").
 The React version makes it easier to do a "multi-page" SPA, 
@@ -105,23 +124,44 @@ Key points:
    * The reason for doing it this way is to allow for independent development of the "react-site", without requiring it to be loaded from the container application.
    * Alternatively, we could make the container application process the URL and send that information down to the "react-site". This method, however, would require that we also implemented something similar on the "react-site" to allow for independent development and would require redundancy.
 
+### State management
+
+In this example, the URL is the only state shared between the micro-frontend and the container application.
+Either the client side reads the URL directly,
+or the component application sends a request that is directly derived from the URL.
+
+* The "react-site" micro-frontend has its own client-side router and will read the browser URL pathname and show the appropriate page.
+* The "hotwire-side" micro-frontend is an MPA. The container application will parse the browser URL and request the appropriate HTML file based on this.
+
 ### CORS
 
 * Cross-origin Turbo Frames requests require preflights.
 
-## Thoughts
+## Main differences compared to the article
 
-This approach follows the [Run-time integration via JavaScript](https://martinfowler.com/articles/micro-frontends.html#Run-timeIntegrationViaJavascript) approach, which is described to be the most practical.
+* We don't use React Router but use our own elementary client-side router. Our solution only works with hard-navigation (a full page reload for each page transition).
+* We don't have to worry about unmounting since we only do hard-navigation.
 
-Each part can be independently deployed and independently developed,
-thus satisfying the technical requirement of a micro frontend.
+## Handling layout shift
 
-Micro-frontends with multiple pages can be integrated into the container application with minimal dependencies.
-The container application should create container pages and summon each micro-frontend from each page.  
+The micro-frontend architecture loads content from various locations which will each arrive independently.
+This will cause layout shift,
+where newly arriving content will push existing elements out of where the new element should be placed.
 
-By enforcing conventions on paths
-such that the path on the container page directly corresponds to a path on the micro-frontend,
-you can minimize configuration and make it easy to manage.
+Layout shift tends to make a website look fidgety and cheap.
+To partially mitigate this, we have put in page layout animations so that the early layouts will not be visible.
 
-This approach displays content as it becomes available and will cause layout shifts.
-To hide this, we have added page transitions that delay the display of the page.
+## What's new about Micro Frontends
+
+### Old stuff
+
+* iframes
+* Vertical segmentation but path – each path directing to a separate app
+* SSI (server side includes)
+
+These technologies are uninteresting since they are so old. The only place where they might be somewhat new is how each micro frontend communicates.
+
+### New stuff
+
+* Loading micro frontends as JavaScript
+* Integrating micro frontends in a single DOM, allowing for more flexibility.

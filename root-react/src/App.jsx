@@ -16,18 +16,9 @@ function Route({path}) {
 }
 
 function App() {
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 10)
-  }, [])
-
   return (
-    <div data-turbo="false">
+    <div data-turbo="false" id="container">
       <Route path={window.location.pathname}/>
-      <div className={loading
-                      ? "loading__in_progress"
-                      : "loading__finished"}></div>
     </div>
   )
 }
