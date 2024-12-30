@@ -1,4 +1,4 @@
-# Micro Frontend Test
+# Micro Frontend Study
 
 This is a trial to get the feel of Micro Frontends. It is based on the following article. 
 
@@ -44,7 +44,13 @@ For convenience, we have included `.env` files into the repository. Override env
 1. ["root-react" container application](https://microfrontend-root-react.vercel.app)
 2. Micro-frontends: ["react-site"](https://microfrontend-react-site.vercel.app), ["hotwire-side](https://microfrontend-hotwire-side.vercel.app)
 
+## Code
+
+[GitHub](https://github.com/naofumi/microfrontend-study)
+
 ## How it works
+
+![microfrontend.png](microfrontend.png)
 
 ### React side
 
@@ -118,4 +124,4 @@ such that the path on the container page directly corresponds to a path on the m
 you can minimize configuration and make it easy to manage.
 
 This approach displays content as it becomes available and will cause layout shifts.
-To hide this, we have added page transitions that hide the page until content has loaded.
+To hide this, we have added page transitions that delay the display of the page.
