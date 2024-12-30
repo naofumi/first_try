@@ -18,12 +18,7 @@ export default function IndexPage() {
 
   return (
     <>
-      <h1>Micro Frontend container</h1>
-      <h2>React side</h2>
-      <div className="react-container">
-        <div id="root-react"></div>
-      </div>
-      <h2>Hotwire side</h2>
+      <div id="root-react"></div>
       <div className="hotwire-container">
         <turbo-frame src={`${viteHotwireHost}${pathAndQuery}`}
                      id="my-turbo-frame"></turbo-frame>

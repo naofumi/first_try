@@ -10,12 +10,53 @@
 </head>
 <body>
 <turbo-frame id="my-turbo-frame">
-  <div class="hotwire">
-    <div data-controller="greetings">
-      <p>This is the hotwire-side</p>
-      <button data-action="click->greetings#greet">Click for Greetings</button>
-      <p data-greetings-target="output"></p>
+  <div class="hotwire" data-controller="greetings">
+    <div data-controller="lightbox">
+      <div class="item-list">
+        <div class="item-box">
+          <img src="https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/restaurant1.webp" alt="restaurant"
+               class="item-image"
+               data-action="click->lightbox#show"
+          />
+        </div>
+        <div class="item-box">
+          <img src="https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/restaurant2.webp" alt="restaurant"
+               class="item-image"
+               data-action="click->lightbox#show"
+          />
+        </div>
+        <div class="item-box">
+          <img src="https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/restaurant3.webp" alt="restaurant"
+               class="item-image"
+               data-action="click->lightbox#show"
+          />
+        </div>
+        <div class="item-box">
+          <img src="https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/restaurant4.webp" alt="restaurant"
+               class="item-image"
+               data-action="click->lightbox#show"
+          />
+        </div>
+        <div class="item-box">
+          <img src="https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/restaurant5.webp" alt="restaurant"
+               class="item-image"
+               data-action="click->lightbox#show"
+          />
+        </div>
+      </div>
+      <div class="lightbox" data-lightbox-target="lightbox">
+        <div class="lightbox-backdrop">
+          <div class="lightbox-close" data-action="click->lightbox#hide">X
+          </div>
+          <img src="" alt="necklace" class="lightbox-image"/>
+        </div>
+      </div>
     </div>
+
+
+    <h2>Restaurants Micro Frontend Hotwire</h2>
+    <button data-action="click->greetings#greet">Click for Greetings</button>
+    <p data-greetings-target="output"></p>
     <a href="/about.html">Hotwire About Page</a>
   </div>
 </turbo-frame>

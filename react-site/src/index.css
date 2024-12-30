@@ -1,27 +1,12 @@
 .react {
-  :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
-
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
-
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
   a {
     font-weight: 500;
-    color: #646cff;
+    color: royalblue;
     text-decoration: inherit;
   }
 
   a:hover {
-    color: #535bf2;
+    color: royalblue;
   }
 
   body {
@@ -35,13 +20,13 @@
   h1 {
     font-size: 3.2em;
     line-height: 1.1;
-    color: blue;
+    color: royalblue;
   }
 
   h2 {
     font-size: 2.4em;
     line-height: 1.1;
-    color: blue;
+    color: royalblue;
   }
 
   button {
@@ -51,7 +36,7 @@
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
-    background-color: blue;
+    background-color: royalblue;
     color: white;
     cursor: pointer;
     transition: border-color 0.25s;
@@ -66,18 +51,73 @@
     outline: 4px auto -webkit-focus-ring-color;
   }
 
-  @media (prefers-color-scheme: light) {
-    :root {
-      color: #213547;
-      background-color: #ffffff;
-    }
-
-    a:hover {
-      color: #747bff;
-    }
-
-    button {
-      background-color: blue;
-    }
+  .item-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
   }
+
+  .item-box {
+    width: 160px;
+    height: 160px;
+    padding: 4px;
+  }
+
+  .item-image {
+    width: 152px;
+    height: 152px;
+    cursor: pointer;
+  }
+
+  .lightbox {
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition-property: opacity, display, visibility;
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+    transition-behavior: allow-discrete;
+  }
+  .lightbox.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  .lightbox-backdrop {
+    background-color: black;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    place-items: center;
+  }
+  .lightbox-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    border: none;
+    background: none;
+    color: white;
+    font-size: 2em;
+    cursor: pointer;
+  }
+
+  .container {
+    border: 2px dotted royalblue;
+    border-radius: 8px;
+    padding: 8px;
+    position: relative;
+  }
+
+  .micro-frontend-label {
+    position: absolute;
+    top: -30px;
+    color: royalblue;
+    text-align: center;
+  }
+
 }

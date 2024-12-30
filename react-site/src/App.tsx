@@ -12,8 +12,9 @@ function Route({path}: {path: string}) {
 
 export default function App() {
   return (
-    <>
+    <div className="container">
+      <div className="micro-frontend-label">Micro Frontend React</div>
       <Route path={window.location.pathname}/>
-    </>
+    </div>
   )
 }
