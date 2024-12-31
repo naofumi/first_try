@@ -1,18 +1,18 @@
 import {useState} from "react"
 
 const items = [
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace1.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace2.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace3.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace4.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace5.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace6.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace7.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace8.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace9.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace10.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace11.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace12.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace1.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace2.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace3.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace4.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace5.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace6.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace7.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace8.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace9.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace10.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace11.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace12.webp"},
 ]
 
 

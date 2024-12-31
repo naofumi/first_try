@@ -2,11 +2,11 @@ import {useState} from "react"
 
 
 const items = [
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace1.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace2.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace3.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace4.webp"},
-  {image: "https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/necklace5.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace1.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace2.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace3.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace4.webp"},
+  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace5.webp"},
 ]
 
 export default function IndexPage() {

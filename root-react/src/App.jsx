@@ -17,7 +17,7 @@ function Route({path}) {
 function TopNav() {
   return <>
     <a href="/">
-      <img src="https://nk-micro-frontend-demo-2.s3.ap-northeast-1.amazonaws.com/logo.webp"
+      <img src="https://apache.castle104.com/assets/micro-frontend-demo/images/logo.webp"
            className="logo" alt="MF Trading Co."/>
     </a>
     <nav className="top-nav">
