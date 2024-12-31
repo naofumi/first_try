@@ -42,10 +42,10 @@ export default function IndexPage() {
         }
       </div>
       <div className={`lightbox ${lightboxVisible ? "show" : ""}`}>
-        <div className="lightbox-backdrop">
-          <div className="lightbox-close" onClick={() => hideLightbox()}>X</div>
+        <div className="lightbox__backdrop">
+          <div className="lightbox__close-button" onClick={() => hideLightbox()}>X</div>
           <img src={items[lightboxIndex].image} alt="necklace"
-               className="lightbox-image"/>
+               className="lightbox__image"/>
         </div>
       </div>
     </>
