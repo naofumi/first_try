@@ -1,16 +1,15 @@
 import './App.css'
 import IndexPage from "./pages/IndexPage.jsx"
-import DetailPage from "./pages/DetailPage.jsx"
-import AboutPage from "./pages/AboutPage.jsx"
+import JewelryPage from "./pages/JewelryPage.jsx"
+import RestaurantsPage from "./pages/RestaurantsPage.jsx"
 
-// eslint-disable-next-line react/prop-types
 function Route({path}) {
   if (path === "/") {
     return <IndexPage/>
-  } else if (path === "/detail" || path.startsWith("/jewelry/buy")) {
-    return <DetailPage/>
-  } else if (path === "/about.html") {
-    return <AboutPage/>
+  } else if (path === "/jewelry" || path.startsWith("/jewelry/buy")) {
+    return <JewelryPage/>
+  } else if (path === "/restaurants.html") {
+    return <RestaurantsPage/>
   }
 }
 
@@ -22,7 +21,7 @@ function TopNav() {
     </a>
     <nav className="top-nav">
       <a href="/">Home</a>
-      <a href="/detail">Jewelry</a>
+      <a href="/jewelry">Jewelry</a>
       <a href="/about">Restaurants</a>
     </nav>
   </>

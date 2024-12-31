@@ -3,7 +3,7 @@ import {loadRemoteAssets} from "../manifest-reader.js"
 
 const viteReactHost = import.meta.env.VITE_REACT_HOST
 
-export default function DetailPage() {
+export default function JewelryPage() {
   useEffect(() => {
     loadRemoteAssets({
       manifestUrl: `${viteReactHost}/.vite/manifest.json`

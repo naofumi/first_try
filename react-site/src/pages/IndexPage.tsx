@@ -44,7 +44,7 @@ export default function IndexPage() {
       />
 
       <div style={{textAlign: "right"}}>
-        <a href="/detail">More items...</a>
+        <a href="/jewelry">More items...</a>
       </div>
     </>
   )

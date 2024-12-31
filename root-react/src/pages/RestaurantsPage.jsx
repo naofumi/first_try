@@ -4,7 +4,7 @@ import {loadRemoteAssets} from "../manifest-reader.js"
 const viteHotwireHost = import.meta.env.VITE_HOTWIRE_HOST
 const pathAndQuery = window.location.pathname + window.location.search
 
-export default function AboutPage() {
+export default function RestaurantsPage() {
   useEffect(() => {
     loadRemoteAssets({
       manifestUrl: `${viteHotwireHost}/.vite/manifest.json`

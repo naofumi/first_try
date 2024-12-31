@@ -24,7 +24,7 @@ export default function BuyPage() {
   return (
     <>
       <h2>Buy Jewelry (React)</h2>
-      <a href="/detail">&lt; Back to list</a>
+      <a href="/jewelry">&lt; Back to list</a>
       <p>You have selected: Item No. {parseInt(id)}</p>
       <p>Price: $10,000</p>
       <img src={item.image} className="item__image--full" alt="necklace" />
