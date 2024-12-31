@@ -10,7 +10,9 @@ function Route({path}: {path: string}) {
   }
 }
 
-export default function App() {
+export default function App({props}: {props: object | Array<object>}) {
+  console.dir(props)
+
   return (
     <div className="container">
       <div className="micro-frontend-label">Micro Frontend React</div>

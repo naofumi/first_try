@@ -18,7 +18,7 @@ export default function IndexPage() {
 
   return (
     <>
-      <div id="root-react"></div>
+      <div data-root></div>
 
       <div className="hotwire-container">
         <turbo-frame src={`${viteHotwireHost}${pathAndQuery}`}

@@ -12,7 +12,7 @@ export default function DetailPage() {
   return <div>
     <h1>Container</h1>
     <div className="react-container">
-      <div id="root-react"></div>
+      <div data-root></div>
     </div>
   </div>
 }
