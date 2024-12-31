@@ -25,36 +25,37 @@ Others do not have a container application and are simply different applications
 Instead of accommodating these approaches and potentially diluting the argument for micro frontends,
 we have taken a narrower view.
 
+The [martinfowler.com article](https://martinfowler.com/articles/micro-frontends.html) by Cam Jackson sums it up nicely.
+
+> In short, micro frontends are all about slicing up big and scary things into smaller, more manageable pieces, and then being explicit about the dependencies between them. Our technology choices, our codebases, our teams, and our release processes should all be able to operate and evolve independently of each other, without excessive coordination.
+
+If the methodology does not achieve these benefits, then it is not a micro frontend.
+
 ## Gist of what we did
 
-The project consists of three parts.
+[The martinfowler.com article](https://martinfowler.com/articles/micro-frontends.html#IntegrationApproaches) describes the general structure of a micro frontend and lists common methods to create these.
 
-1. "root" is where everything comes together. This is the page that the user will see and is called the **container application** in the above article. This page pulls in the frontends from the two other parts.
+This project follows the "run-time integration with JavaScript" approach and consists of three micro frontends.
+
+1. "react-root" is where everything comes together. This is the page that the user will see and is called the **container application** in the above article. This page pulls in the frontends from the two other parts.
 2. "react side" is a micro frontend written in React.
 3. "hotwire side" is a micro frontend written in Hotwire.
 
-We also have "root-react" which is a copy of the "root" application, re-written in React.
-
-## What does it mean to be a Micro Frontend?
-
-Similar to microservices on the backend, we placed independent deploy-ability as the key goal.
-This means that separating code alone is not enough and that we should be able
-to develop and deploy each micro frontend with very little consideration of what version the others are on.
-The goal is to have minimal coordination required between teams, and if code separation does not allow this,
-then [that is not a micro frontend](https://martinfowler.com/articles/micro-frontends.html#Build-timeIntegration).
-
-Only code separation that enables independent deployment can be considered a micro frontend.
-
 ## How to get it running
 
-1. CD into the "root" project. Build it with `npm run build`. Then start the server with `npm run preview`. Leave this running.
-2. CD into the "react-side" project. Build it with `npm run build`. Then start the server with `npm run preview`. Leave this running. Alternatively, if you are only running the "react-side" project during development, then you can run `npm run dev` and view this micro frontend in isolation. 
+1. CD into the "root-react" project. Build it with `npm run build`. Then start the server with `npm run preview`. Leave this running.
+2. CD into the "react-site" project. Build it with `npm run build`. Then start the server with `npm run preview`. Leave this running. Alternatively, if you are only running the "react-site" project during development, then you can run `npm run dev` and view this micro frontend in isolation. 
 3. CD into the "hotwire-side" project. Build it with `npm run build`. Then start the server with `npm run preview`. Leave this running. Alternatively, if you are only running the "hotwire-side" project during development, then you can run `npm run dev` and view this micro frontend in isolation.
-4. Access the "root" project. This should pull in files from the "react-side", "hotwire-side" and display the page. 
+4. Access the "react-root" project. This should pull in files from the "react-side", "hotwire-side" and display the page. 
 
 Notes: 
-For integration testing where you load in the "react-side" and "hotwire-side" into the "root" project, you must use production builds of the "react-side" and "hotwire-side".
-In other words, the development server versions of "react-side" and "hotwire-side" should be used for independent development of each micro-frontend but cannot be used in integration.
+For integration testing where you load in the "react-side" and "hotwire-side" into the "react-root"
+project, you must use production builds of the "react-site" and "hotwire-side".
+In other words, the development server versions of "react-side" and "hotwire-side"
+can be used for independent development of each micro-frontend,
+but they can't be used in integration.
+Technically, this is because Vite's development server does not build manifest files that the "react-root"
+container application can read.
 
 ## Setup notes
 
@@ -76,44 +77,34 @@ For convenience, we have included `.env` files into the repository. Override env
 ### React side
 
 The React side builds a JavaScript file that contains the "react-side" application.
-When this JavaScript is loaded in the "container" application, 
-it is inserted into any elements with a `data-root` attribute. 
-CSS is also loaded.
 
-The build will generate a manifest file so that the container application can look up the filenames of the latest versions.
+When this JavaScript is loaded in the "container" application, 
+the `App` component is rendered inside any elements with a `data-root` attribute. 
+CSS is also loaded from the "react-side" application.
 
 ### Hotwire side
 
-Hotwire is a combination of HTML and JavaScript. We need to pull in both. 
+Unlike React, which uses JavaScript to render HTML, Hotwire requires both HTML and JavaScript files (and of course CSS). We need to pull in both. 
 
 The container application will pull in HTML from the "hotwire-side" application using `turbo-frames`.
-This will require CORS settings, which are provided in `vercel.json` for Vercel deployment.
+Cross orgin Turbo Frame requests require CORS settings, which are provided in `vercel.json` for Vercel deployment.
 The container application will also pull in the JavaScript and CSS from the "hotwire-side" application. 
 
-The build will generate a manifest file so that the "root" application can look up the filenames of the latest versions.
-
-Both Turbo and Stimulus both assume that they are run under a global scope.
+Both Turbo and Stimulus assume that they are run under the global scope.
 If we have two micro-frontends that both pull in Stimulus independently,
 then we could run into cases where Stimulus actions are being called more than once.
-To prevent this, both Turbo and Stimulus should not be built in the bundles.
-Instead, they should be hosted on an asset server and be imported.
+To prevent this, both Turbo and Stimulus should not be built into Vite bundles.
+Instead, they should be hosted on an asset server and imported.
 
 ### Root: Container app
 
 This container application will pull in the files required for showing the "react-side"
 and the "hotwire-side" micro-frontends.
-It will first read the manifest files from the frontends and request the latest file versions. 
+It will first read the manifest files from the respective frontends
+and request the latest file versions with digests in their filenames. 
 
-The container application has an elementary client-side router to switch between pages depending on the browser URL.
+The container application has a simple client-side router to switch between pages depending on the browser URL.
 Each page will pull in the micro-frontends that it needs.
-
-In addition to the vanilla JavaScript version of the root application, we also have a React version ("root-react").
-
-### Root-React: Container app in React
-
-This is basically a copy of the "container" application, but we have added client-side routing and a bit of polish.
-
-Find a description of the client-side routing below.
 
 ### Client-side routing
 
@@ -121,30 +112,25 @@ This is loosely based on the [example on martinfowler.com](https://martinfowler.
 
 Key points:
 
-* We need to turn off Turbo because this will interfere with routing. We will do page transitions with a full-page reload ("hard navigation").
+* We turn off Turbo because this will interfere with routing. We will do page transitions with a full-page reload ("hard navigation").
 * We need two routers
    * On the container application side, we need to change the page layout when the route changes. The first router, therefore, is in the container application. In the current case, the "/detail" path should just show the "react-site" and not show the "hotwire-site". We also change the page heading.
    * The container application does not manage the state of the "react-site". It is up to the "react-site" to show the appropriate page for the "/detail" path.
    * The "react-site" application has a second router. It looks up the current URL and shows the page for this path.
-   * The reason for doing it this way is to allow for independent development of the "react-site", without requiring it to be loaded from the container application.
-   * Alternatively, we could make the container application process the URL and send that information down to the "react-site". This method, however, would require that we also implemented something similar on the "react-site" to allow for independent development and would require redundancy.
+   * In addition, the container application can send props to the "react-site".
+   * With the "hotwire-side" application, the container application sends a Turbo Frame request specific to the page that is being displayed. Basic static-site routing is done on the "hotwire-side" server.
 
 ### State management
 
-In this example, the URL is the only state shared between the micro-frontend and the container application.
-Either the client side reads the URL directly,
-or the component application sends a request that is directly derived from the URL.
+The current application shares two global states.
 
-* The "react-site" micro-frontend has its own client-side router and will read the browser URL pathname and show the appropriate page.
-* The "hotwire-side" micro-frontend is an MPA. The container application will parse the browser URL and request the appropriate HTML file based on this.
-
-### CORS
-
-* Cross-origin Turbo Frames requests require preflights.
+* The URL
+* For the "react-side", additional state can be sent in with the `data-props` attribute.
+* For the "hotwire-side", additional state information is sent in with the Turbo Frame request URL.
 
 ## Main differences compared to the article
 
-* We don't use React Router but use our own elementary client-side router. Our solution only works with hard-navigation (a full page reload for each page transition).
+* We don't use React Router but use our own elementary client-side router. Our solution only works with hard-navigation (a full page reload for each page transition) and becomes much simpler.
 * We don't have to worry about unmounting since we only do hard-navigation.
 
 ## Handling layout shift
@@ -155,18 +141,3 @@ where newly arriving content will push existing elements out of where the new el
 
 Layout shift tends to make a website look fidgety and cheap.
 To partially mitigate this, we have put in page layout animations so that the early layouts will not be visible.
-
-## What's new about Micro Frontends
-
-### Old stuff
-
-* iframes
-* Vertical segmentation but path – each path directing to a separate app
-* SSI (server side includes)
-
-These technologies are uninteresting since they are so old. The only place where they might be somewhat new is how each micro frontend communicates.
-
-### New stuff
-
-* Loading micro frontends as JavaScript
-* Integrating micro frontends in a single DOM, allowing for more flexibility.
