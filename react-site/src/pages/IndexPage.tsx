@@ -1,4 +1,5 @@
-import {useState} from "react"
+import Lightbox from "../components/Lightbox.tsx"
+import {useLightbox} from "../hooks/useLightbox.tsx"
 
 
 const items = [
@@ -9,37 +10,33 @@ const items = [
   {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace5.webp"},
 ]
 
+function ItemList({items, showLightbox}:
+                  { items: { image: string }[],
+                    showLightbox: (index: number) => void }) {
+  return (
+    <div className="item__list">
+      {items.map((item, i) => {
+        return <div key={i} className="item__box">
+          <img src={item.image} alt="necklace" className="item__image" onClick={() => showLightbox(i)}/>
+        </div>
+      })
+      }
+    </div>
+  )
+}
+
+
 export default function IndexPage() {
-  const [lightboxIndex, setLightboxIndex] = useState<number>(0)
-  const [lightboxVisible, setLightboxVisible] = useState<boolean>(false)
-
-  function showLightbox(index: number) {
-    setLightboxIndex(index)
-    setLightboxVisible(true)
-  }
-
-  function hideLightbox() {
-    setLightboxVisible(false)
-  }
+  const {lightboxIndex, lightboxVisible, showLightbox, hideLightbox} = useLightbox()
 
   return (
     <>
       <h2>Jewelry Micro Frontend (React)</h2>
-      <div className="item-list">
-        {items.map((item, i) => {
-          return <div key={i} className="item-box">
-            <img src={item.image} alt="necklace" className="item-image" onClick={() => showLightbox(i)}/>
-          </div>
-        })
-        }
-      </div>
-      <div className={`lightbox ${lightboxVisible ? "show" : ""}`}>
-        <div className="lightbox__backdrop">
-          <div className="lightbox__close-button" onClick={() => hideLightbox()}>X</div>
-          <img src={items[lightboxIndex].image} alt="necklace"
-               className="lightbox__image"/>
-        </div>
-      </div>
+      <ItemList items={items} showLightbox={showLightbox} />
+
+      <Lightbox image={items[lightboxIndex].image}
+                lightboxVisible={lightboxVisible}
+                hideLightbox={hideLightbox}/>
 
       <div style={{textAlign: "right"}}>
         <a href="/detail">More items...</a>
@@ -47,3 +44,4 @@ export default function IndexPage() {
     </>
   )
 }
+

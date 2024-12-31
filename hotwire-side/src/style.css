@@ -74,20 +74,20 @@
     color: #888;
   }
 
-  .item-list {
+  .item__list {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 16px;
   }
 
-  .item-box {
+  .item__box {
     width: 160px;
     height: 160px;
     padding: 4px;
   }
 
-  .item-image {
+  .item__image {
     width: 152px;
     height: 152px;
     cursor: pointer;
