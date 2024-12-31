@@ -20,10 +20,10 @@ export default function IndexPage() {
     <>
       <div data-root></div>
 
-      <div className="hotwire-container">
-        <turbo-frame src={`${viteHotwireHost}${pathAndQuery}`}
-                     id="my-turbo-frame"></turbo-frame>
-      </div>
+      <hr className="horizontal-line"/>
+
+      <turbo-frame src={`${viteHotwireHost}${pathAndQuery}`}
+                   id="my-turbo-frame"></turbo-frame>
     </>
   )
 }

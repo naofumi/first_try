@@ -105,3 +105,9 @@ button:focus-visible {
     color: limegreen;
     text-align: center;
 }
+
+.horizontal-line {
+    margin: 32px auto;
+    width: 80%;
+    color: goldenrod;
+}

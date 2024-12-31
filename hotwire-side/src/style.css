@@ -153,14 +153,18 @@
     outline: 4px auto -webkit-focus-ring-color;
   }
 
-  @media (prefers-color-scheme: light) {
-    :root {
-      color: #213547;
-      background-color: #ffffff;
-    }
+  .container {
+    border: 2px dotted red;
+    border-radius: 8px;
+    padding: 8px;
+    position: relative;
+  }
 
-    a:hover {
-      color: orangered;
-    }
+  .micro-frontend-label {
+    position: absolute;
+    top: -30px;
+    color: red;
+    text-align: center;
   }
 }
+
