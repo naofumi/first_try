@@ -1,26 +1,29 @@
 # Micro Frontend Study
 
-This is a test website for studying Micro Frontends. It is based on the following article, but much more simplified. 
+This is a website for studying Micro Frontends. It is based on the following article, but much more simplified. 
 
 [Micro Frontends are described in this martinfowler.com article](https://martinfowler.com/articles/micro-frontends.html#TheExampleInDetail)
 
 ## What is a Micro Frontend
 
-Wikipedia defines Micro frontends as the following;
-* Each micro frontend is independently developed. 
-* It is for client-side single-page applications written in JavaScript.
-* Tools are module federation (webpack), libraries like Single-SPA, Web Components, or iframes.
+In general, micro frontends are defined by the following characteristics.
+
+* The frontend is divided into separate micro frontends which handle individual features.
+* Each micro frontend is independently developed, tested and deployed.
+* Each feature is managed by a single vertical team. There should be no cross-cutting teams.
+* There should be a container application that provides common headers, footers, authentication, navigation, etc.
+* The container application should read in each micro frontend and determine what is shown and when.
+* Some tools are module federation (webpack), libraries like Single-SPA, Web Components, or iframes.
 
 Some resources
 * [micro-frontends.org](https://micro-frontends.org)
+* [martinfowler.com](https://martinfowler.com/articles/micro-frontends.html)
 * [The Truth Behind Micro Frontends: Insights from Real Case Studies](https://www.bitovi.com/blog/the-truth-behind-micro-frontends-insights-from-real-case-studies)
 
 There are many examples that claim to be Micro frontends but do not satisfy the first requirement that each micro frontend must be independently developed and deployed.
-Importantly, if the container application needs to be rebuilt (or rerun if you are in development), then my understanding is that it is not a micro frontend since deployment is no longer independent.
-
-Moreover, vertically split micro frontends do provide the same benefits. 
-However, the technology is extremely old, and it seems odd to [tout this as a new development](https://vercel.com/blog/how-vercel-adopted-microfrontends).
-Here, we will only consider horizontally split micro frameworks.
+Others do not have a container application and are simply different applications behind a single host name.
+Instead of accommodating these approaches and potentially diluting the argument for micro frontends,
+we have taken a narrower view.
 
 ## Gist of what we did
 
@@ -35,14 +38,12 @@ We also have "root-react" which is a copy of the "root" application, re-written 
 ## What does it mean to be a Micro Frontend?
 
 Similar to microservices on the backend, we placed independent deploy-ability as the key goal.
-This means that we should be able to develop and deploy each micro frontend with very little consideration of what version the others are on.
-In other words, there should be minimal coordination required between teams.
+This means that separating code alone is not enough and that we should be able
+to develop and deploy each micro frontend with very little consideration of what version the others are on.
+The goal is to have minimal coordination required between teams, and if code separation does not allow this,
+then [that is not a micro frontend](https://martinfowler.com/articles/micro-frontends.html#Build-timeIntegration).
 
-In practice, we designed this example so that each application can be developed in isolation –
-we can run it without running the others.
-In particular, we want to avoid [build-time integration](https://martinfowler.com/articles/micro-frontends.html#Build-timeIntegration). 
-
-As mentioned in the article, one hallmark is that neither the component application nor the micro-frontends pull in each other as build dependencies.
+Only code separation that enables independent deployment can be considered a micro frontend.
 
 ## How to get it running
 
@@ -76,16 +77,16 @@ For convenience, we have included `.env` files into the repository. Override env
 
 The React side builds a JavaScript file that contains the "react-side" application.
 When this JavaScript is loaded in the "container" application, 
-it is inserted into the `root#react-root` element in `index.html`. 
+it is inserted into any elements with a `data-root` attribute. 
 CSS is also loaded.
 
-The build will generate a manifest file so that the "root" application can look up the filenames of the latest versions.
+The build will generate a manifest file so that the container application can look up the filenames of the latest versions.
 
 ### Hotwire side
 
 Hotwire is a combination of HTML and JavaScript. We need to pull in both. 
 
-The "root" container application will pull in HTML from the "hotwire-side" applications using `turbo-frames`.
+The container application will pull in HTML from the "hotwire-side" application using `turbo-frames`.
 This will require CORS settings, which are provided in `vercel.json` for Vercel deployment.
 The container application will also pull in the JavaScript and CSS from the "hotwire-side" application. 
 
@@ -107,8 +108,6 @@ The container application has an elementary client-side router to switch between
 Each page will pull in the micro-frontends that it needs.
 
 In addition to the vanilla JavaScript version of the root application, we also have a React version ("root-react").
-The React version makes it easier to do a "multi-page" SPA, 
-and so we will move towards this and remove the vanilla JavaScript version in the future.
 
 ### Root-React: Container app in React
 
