@@ -91,6 +91,12 @@ The container application will also pull in the JavaScript and CSS from the "hot
 
 The build will generate a manifest file so that the "root" application can look up the filenames of the latest versions.
 
+Both Turbo and Stimulus both assume that they are run under a global scope.
+If we have two micro-frontends that both pull in Stimulus independently,
+then we could run into cases where Stimulus actions are being called more than once.
+To prevent this, both Turbo and Stimulus should not be built in the bundles.
+Instead, they should be hosted on an asset server and be imported.
+
 ### Root: Container app
 
 This container application will pull in the files required for showing the "react-side"

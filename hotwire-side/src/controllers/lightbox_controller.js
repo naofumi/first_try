@@ -1,4 +1,4 @@
-import {Controller} from '@hotwired/stimulus'
+import {Controller} from "https://apache.castle104.com/assets/micro-frontend-demo/javascript/stimulus-3.2.1.js"
 
 export default class extends Controller {
   static targets = ['lightbox']
