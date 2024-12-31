@@ -28,11 +28,96 @@
   </style>
   <script src="/src/application.js" type="module"></script>
 </head>
-<body>
+<body style="padding: 30px">
 <turbo-frame id="my-turbo-frame">
   <div class="hotwire">
-    <h2>This is the about page for Hotwire side</h2>
-    <a href="/">Index Page</a>
+    <div class="container">
+      <div class="micro-frontend-label">Micro Frontend Hotwire</div>
+      <h2>Restaurants Micro Frontend (Hotwire)</h2>
+      <div data-controller="lightbox">
+        <div class="item__list">
+          <div class="item__box">
+            <img src="https://apache.castle104.com/assets/micro-frontend-demo/images/restaurant1.webp" alt="restaurant"
+                 class="item__image"
+                 data-action="click->lightbox#show"
+            />
+          </div>
+          <div class="item__box">
+            <img src="https://apache.castle104.com/assets/micro-frontend-demo/images/restaurant2.webp" alt="restaurant"
+                 class="item__image"
+                 data-action="click->lightbox#show"
+            />
+          </div>
+          <div class="item__box">
+            <img src="https://apache.castle104.com/assets/micro-frontend-demo/images/restaurant3.webp" alt="restaurant"
+                 class="item__image"
+                 data-action="click->lightbox#show"
+            />
+          </div>
+          <div class="item__box">
+            <img src="https://apache.castle104.com/assets/micro-frontend-demo/images/restaurant4.webp" alt="restaurant"
+                 class="item__image"
+                 data-action="click->lightbox#show"
+            />
+          </div>
+          <div class="item__box">
+            <img src="https://apache.castle104.com/assets/micro-frontend-demo/images/restaurant5.webp" alt="restaurant"
+                 class="item__image"
+                 data-action="click->lightbox#show"
+            />
+          </div>
+          <div class="item__box">
+            <img src="https://apache.castle104.com/assets/micro-frontend-demo/images/restaurant6.webp" alt="restaurant"
+                 class="item__image"
+                 data-action="click->lightbox#show"
+            />
+          </div>
+          <div class="item__box">
+            <img src="https://apache.castle104.com/assets/micro-frontend-demo/images/restaurant7.webp" alt="restaurant"
+                 class="item__image"
+                 data-action="click->lightbox#show"
+            />
+          </div>
+          <div class="item__box">
+            <img src="https://apache.castle104.com/assets/micro-frontend-demo/images/restaurant8.webp" alt="restaurant"
+                 class="item__image"
+                 data-action="click->lightbox#show"
+            />
+          </div>
+          <div class="item__box">
+            <img src="https://apache.castle104.com/assets/micro-frontend-demo/images/restaurant9.webp" alt="restaurant"
+                 class="item__image"
+                 data-action="click->lightbox#show"
+            />
+          </div>
+          <div class="item__box">
+            <img src="https://apache.castle104.com/assets/micro-frontend-demo/images/restaurant10.webp" alt="restaurant"
+                 class="item__image"
+                 data-action="click->lightbox#show"
+            />
+          </div>
+          <div class="item__box">
+            <img src="https://apache.castle104.com/assets/micro-frontend-demo/images/restaurant11.webp" alt="restaurant"
+                 class="item__image"
+                 data-action="click->lightbox#show"
+            />
+          </div>
+          <div class="item__box">
+            <img src="https://apache.castle104.com/assets/micro-frontend-demo/images/restaurant12.webp" alt="restaurant"
+                 class="item__image"
+                 data-action="click->lightbox#show"
+            />
+          </div>
+        </div>
+        <div class="lightbox" data-lightbox-target="lightbox">
+          <div class="lightbox__backdrop">
+            <div class="lightbox__close-button" data-action="click->lightbox#hide">X
+            </div>
+            <img src="" alt="necklace" class="lightbox__image"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </turbo-frame>
 
