@@ -7,7 +7,7 @@ import AboutPage from "./pages/AboutPage.jsx"
 function Route({path}) {
   if (path === "/") {
     return <IndexPage/>
-  } else if (path === "/detail") {
+  } else if (path === "/detail" || path.startsWith("/jewelry/buy")) {
     return <DetailPage/>
   } else if (path === "/about.html") {
     return <AboutPage/>

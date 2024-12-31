@@ -1,7 +1,3 @@
-import {useLightbox} from "../hooks/useLightbox.tsx"
-import Lightbox from "../components/Lightbox.tsx"
-import {navigateTo} from "../utilities/navigation.ts"
-
 const items = [
   {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace1.webp"},
   {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace2.webp"},
@@ -17,26 +13,21 @@ const items = [
   {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace12.webp"},
 ]
 
-export default function IndexPage() {
-  const {lightboxIndex, lightboxVisible, showLightbox, hideLightbox} = useLightbox()
+export default function BuyPage() {
+  const id = (new URL(document.location.href)).searchParams.get('id')
+  if (!id || !items[parseInt(id) - 1]) {
+    return <h2>Invalid ID</h2>
+  }
+
+  const item = items[parseInt(id) - 1]
 
   return (
     <>
-      <h2>Jewelry Micro Frontend (React)</h2>
-
-      <div className="item__list">
-        {items.map((item, i) => {
-          return <div key={i} className="item__box">
-            <img src={item.image} alt="necklace" className="item__image" onClick={() => showLightbox(i)}/>
-          </div>
-        })
-        }
-      </div>
-
-      <Lightbox image={items[lightboxIndex].image}
-                lightboxVisible={lightboxVisible}
-                hideLightbox={hideLightbox}
-                buy={() => navigateTo(`/jewelry/buy?id=${lightboxIndex + 1}`)}/>
+      <h2>Buy Jewelry (React)</h2>
+      <a href="/detail">&lt; Back to list</a>
+      <p>You have selected: Item No. {parseInt(id)}</p>
+      <p>Price: $10,000</p>
+      <img src={item.image} className="item__image--full" alt="necklace" />
     </>
   )
 }

@@ -1,5 +1,6 @@
 import Lightbox from "../components/Lightbox.tsx"
 import {useLightbox} from "../hooks/useLightbox.tsx"
+import {navigateTo} from "../utilities/navigation.ts"
 
 
 const items = [
@@ -11,8 +12,10 @@ const items = [
 ]
 
 function ItemList({items, showLightbox}:
-                  { items: { image: string }[],
-                    showLightbox: (index: number) => void }) {
+                  {
+                    items: { image: string }[],
+                    showLightbox: (index: number) => void
+                  }) {
   return (
     <div className="item__list">
       {items.map((item, i) => {
@@ -32,11 +35,13 @@ export default function IndexPage() {
   return (
     <>
       <h2>Jewelry Micro Frontend (React)</h2>
-      <ItemList items={items} showLightbox={showLightbox} />
+      <ItemList items={items} showLightbox={showLightbox}/>
 
       <Lightbox image={items[lightboxIndex].image}
                 lightboxVisible={lightboxVisible}
-                hideLightbox={hideLightbox}/>
+                hideLightbox={hideLightbox}
+                buy={() => navigateTo(`/jewelry/buy?id=${lightboxIndex + 1}`)}
+      />
 
       <div style={{textAlign: "right"}}>
         <a href="/detail">More items...</a>
