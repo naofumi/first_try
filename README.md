@@ -133,8 +133,11 @@ The current application shares two global states.
 
 ## Main differences compared to the article
 
-* We don't use React Router but use our own elementary client-side router. Our solution only works with hard-navigation (a full page reload for each page transition) and becomes much simpler.
-* We don't have to worry about unmounting since we only do hard-navigation.
+* We don't use React Router but use our own elementary client-side router. Our solution works well with hard-navigation(a full page reload for each page transition).
+* The choice of hard-navigation simplifies implementation at the expense of efficiency.
+   * We don't have to worry about unmounting since we only do hard-navigation.
+   * Updating/revalidating other micro frontends is done when they are reloaded.
+   * Even micro frontends that don't need revalidation will be updated.
 
 ## Handling layout shift
 
@@ -144,3 +147,8 @@ where newly arriving content will push existing elements out of where the new el
 
 Layout shift tends to make a website look fidgety and cheap.
 To partially mitigate this, we have put in page layout animations so that the early layouts will not be visible.
+
+## Other
+
+* We have not implemented inter-micro frontend communication. This would typically involve custom JavaScript events.
+* 
