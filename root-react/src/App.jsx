@@ -22,7 +22,7 @@ function TopNav() {
     <nav className="top-nav">
       <a href="/">Home</a>
       <a href="/jewelry">Jewelry</a>
-      <a href="/restaurants">Restaurants</a>
+      <a href="/restaurants.html">Restaurants</a>
     </nav>
   </>
 }
