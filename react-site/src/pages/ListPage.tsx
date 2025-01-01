@@ -17,7 +17,7 @@ const items = [
   {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace12.webp"},
 ]
 
-export default function IndexPage() {
+export default function ListPage() {
   const {lightboxIndex, lightboxVisible, showLightbox, hideLightbox} = useLightbox()
 
   return (

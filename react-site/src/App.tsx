@@ -1,13 +1,13 @@
 import './App.css'
 import IndexPage from "./pages/IndexPage.tsx"
-import DetailPage from "./pages/ListPage.tsx"
+import ListPage from "./pages/ListPage.tsx"
 import BuyPage from "./pages/BuyPage.tsx"
 
 function Route({path}: {path: string}) {
   if (path === "/") {
     return <IndexPage />
   } else if (path === "/jewelry") {
-    return <DetailPage />
+    return <ListPage />
   } else if (path.startsWith("/jewelry/buy")) {
     return <BuyPage />
   }
