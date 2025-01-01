@@ -1,8 +1,11 @@
 # Micro Frontend Study
 
-This is a website for studying Micro Frontends. It is based on the following article, but much more simplified. 
+This is a website for studying Micro Frontends. It is based on the following article, but simplified. 
 
 [Micro Frontends are described in this martinfowler.com article](https://martinfowler.com/articles/micro-frontends.html#TheExampleInDetail)
+
+I have also written [a Japanese blog article](https://zenn.dev/naofumik/articles/c5d59fe1c46a3a)
+which also has a video of me talking. 
 
 ## What is a Micro Frontend
 
