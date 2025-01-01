@@ -1,15 +1,10 @@
 import Lightbox from "../components/Lightbox.tsx"
 import {useLightbox} from "../hooks/useLightbox.tsx"
 import {navigateTo} from "../utilities/navigation.ts"
+import {allItems} from "../models/items.ts"
 
 
-const items = [
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace1.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace2.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace3.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace4.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace5.webp"},
-]
+const items = allItems().slice(0, 5)
 
 function ItemList({items, showLightbox}:
                   {

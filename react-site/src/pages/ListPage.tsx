@@ -1,21 +1,9 @@
 import {useLightbox} from "../hooks/useLightbox.tsx"
 import Lightbox from "../components/Lightbox.tsx"
 import {navigateTo} from "../utilities/navigation.ts"
+import {allItems} from "../models/items.ts"
 
-const items = [
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace1.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace2.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace3.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace4.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace5.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace6.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace7.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace8.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace9.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace10.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace11.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace12.webp"},
-]
+const items = allItems()
 
 export default function ListPage() {
   const {lightboxIndex, lightboxVisible, showLightbox, hideLightbox} = useLightbox()

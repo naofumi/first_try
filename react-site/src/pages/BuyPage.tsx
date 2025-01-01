@@ -1,25 +1,12 @@
-const items = [
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace1.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace2.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace3.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace4.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace5.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace6.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace7.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace8.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace9.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace10.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace11.webp"},
-  {image: "https://apache.castle104.com/assets/micro-frontend-demo/images/necklace12.webp"},
-]
+import {itemById} from "../models/items.ts"
 
 export default function BuyPage() {
   const id = (new URL(document.location.href)).searchParams.get('id')
-  if (!id || !items[parseInt(id) - 1]) {
+  const item = id && itemById(id)
+
+  if (!id || !item) {
     return <h2>Invalid ID</h2>
   }
-
-  const item = items[parseInt(id) - 1]
 
   return (
     <>
