@@ -1,0 +1,21 @@
+.marketing {
+  .banner__image--1792x1024 {
+    width: 100%;
+    aspect-ratio: 1792/1024;
+    object-fit: contain;
+  }
+
+  .container {
+    border: 2px dotted goldenrod;
+    border-radius: 8px;
+    padding: 8px;
+    position: relative;
+  }
+
+  .micro-frontend-label {
+    position: absolute;
+    top: -30px;
+    color: goldenrod;
+    text-align: center;
+  }
+}
