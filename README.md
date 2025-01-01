@@ -64,6 +64,11 @@ container application can read.
 
 For convenience, we have included `.env` files into the repository. Override environment variables in deployment as necessary.
 
+## Deployment
+
+* All micro frontends are deployed on Vercel. Deploy with `vercel --prod`.
+* Assets are deployed on apache.castle104.com
+
 ## Demo
 
 1. ["root-react" container application](https://microfrontend-root-react.vercel.app)
