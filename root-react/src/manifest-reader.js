@@ -1,6 +1,10 @@
 export function loadRemoteAssets({manifestUrl}) {
   const origin = new URL(manifestUrl).origin
 
+  /*
+  * Here we read the manifest file (JSON), load and execute JavaScript,
+  * and load stylesheets.
+  * */
   fetch(manifestUrl)
     .then(res => res.json())
     .then(json => {

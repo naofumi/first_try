@@ -3,6 +3,13 @@ import IndexPage from "./pages/IndexPage.jsx"
 import JewelryPage from "./pages/JewelryPage.jsx"
 import RestaurantsPage from "./pages/RestaurantsPage.jsx"
 
+/*
+* This is a basic router for the container application.
+*
+* Whenever you want to add a new micro frontend, you register the URL path here
+* and the component that serves as the container.
+*
+* */
 function Route({path}) {
   if (path === "/") {
     return <IndexPage/>

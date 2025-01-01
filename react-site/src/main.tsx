@@ -5,7 +5,7 @@ import App from './App.tsx'
 /*
 * The `App` component will be rendered in any element with a `data-root` attribute.
 * The `data-props` attribute will be handed down to the `App` component if available,
-* allowing customization.
+* allowing additional sharing of state from the container to the child micro frontend.
 *
 *   <div data-root data-props='{"foo": "bar"}'></div>
 *
