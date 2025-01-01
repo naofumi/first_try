@@ -95,6 +95,8 @@
 
   .lightbox {
     z-index: 9999;
+    position: fixed;
+    inset: 0;
     visibility: hidden;
     opacity: 0;
     transition-property: opacity, display, visibility;
