@@ -66,7 +66,7 @@ For convenience, we have included `.env` files into the repository. Override env
 
 ## Deployment
 
-* All micro frontends are deployed on Vercel. Deploy with `vercel --prod`.
+* All micro-frontends are deployed on Vercel. Deploy each micro-frontend with `vercel --prod`.
 * Assets are deployed on apache.castle104.com
 
 ## Demo
