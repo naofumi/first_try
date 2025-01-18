@@ -9,7 +9,8 @@ export default function JewelryPage() {
       manifestUrl: `${viteReactHost}/.vite/manifest.json`
     })
   }, [])
+
   return <div>
-    <div data-root></div>
+    <div data-microfrontend-name="react-site"></div>
   </div>
 }

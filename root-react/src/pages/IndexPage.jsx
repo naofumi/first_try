@@ -1,5 +1,5 @@
 import '../App.css'
-import {useEffect} from "react"
+import {useEffect, useState} from "react"
 import {loadRemoteAssets} from "../manifest-reader.js"
 
 const viteReactHost = import.meta.env.VITE_REACT_HOST
@@ -22,24 +22,26 @@ const pathAndQuery = window.location.pathname + window.location.search
 * */
 export default function IndexPage() {
   useEffect(() => {
+    // We load assets inside a useEffect hook because we only
+    // want to load once, and not for every render.
+    loadRemoteAssets({
+      manifestUrl: `${viteMarketingHost}/.vite/manifest.json`
+    })
     loadRemoteAssets({
       manifestUrl: `${viteReactHost}/.vite/manifest.json`
     })
     loadRemoteAssets({
       manifestUrl: `${viteHotwireHost}/.vite/manifest.json`
     })
-    loadRemoteAssets({
-      manifestUrl: `${viteMarketingHost}/.vite/manifest.json`
-    })
   }, [])
 
   return (
     <>
       <div style={{marginBottom: "32px"}}>
-        <div data-marketing-root></div>
+        <div data-microfrontend-name="marketing"></div>
       </div>
 
-      <div data-root></div>
+      <div data-microfrontend-name="react-site"></div>
 
       <hr className="horizontal-line"/>
 

@@ -1,11 +1,11 @@
 # Micro Frontend Study
 
-This is a website for studying Micro Frontends. It is based on the following article, but simplified. 
+This is a website for studying Micro Frontends. It is based on the following article but simplified. 
 
-[Micro Frontends are described in this martinfowler.com article](https://martinfowler.com/articles/micro-frontends.html#TheExampleInDetail)
+[Micro Frontends on martinfowler.com article](https://martinfowler.com/articles/micro-frontends.html#TheExampleInDetail)
 
 I have also written [a Japanese blog article](https://zenn.dev/naofumik/articles/c5d59fe1c46a3a)
-which also has a video of me talking. 
+which also has a video of me talking about this. 
 
 ## What is a Micro Frontend
 
@@ -104,6 +104,21 @@ then we could run into cases where Stimulus actions are being called more than o
 To prevent this, both Turbo and Stimulus should not be built into Vite bundles.
 Instead, they should be hosted on an asset server and imported.
 
+### Contract for each micro-frontend
+
+Each micro-frontend is responsible for attaching itself to the container application.
+
+If it is a React application,
+then the container will provide HTML tags with `data-microfrontend-name="[name of frontend]"`.
+Each micro-frontend JavaScript file should attach itself to the relevant HTML tags after loading.
+
+If it is a Hotwire application,
+then the container will provide `turbo-frame` tags or other mechanisms for loading HTML.
+
+The JavaScript and CSS files for each micro-frontend should be loaded by the container application in addition to the above HTML tags.
+The JavaScripts assume that the HTML tags are already present in the DOM –
+they will not wait for `DOMContentLoaded` events, etc.
+
 ### Root: Container app
 
 This container application will pull in the files required for showing the "react-side"
@@ -136,13 +151,16 @@ The current application shares two global states.
 * For the "react-side", additional state can be sent in with the `data-props` attribute.
 * For the "hotwire-side", additional state information is sent in with the Turbo Frame request URL.
 
+
+
 ## Main differences compared to the article
 
-* We don't use React Router but use our own elementary client-side router. Our solution works well with hard-navigation(a full page reload for each page transition).
+* We don't use React Router but use our own elementary client-side router. Our solution works well with hard-navigation (a full page reload for each page transition).
 * The choice of hard-navigation simplifies implementation at the expense of efficiency.
    * We don't have to worry about unmounting since we only do hard-navigation.
    * Updating/revalidating other micro frontends is done when they are reloaded.
-   * Even micro frontends that don't need revalidation will be updated.
+   * Even micro-frontends that don't need revalidation will be updated.
+* The contract is different. The martinfowler.com article requires that each micro-frontend attaches global methods to the `window` object. Then the container calls these methods with the ID of the HTML element to which it should be attached. In our case, each micro-frontend is responsible for attaching itself to all elements which have `data-microfrontend-name="[name of micro-frontend]`.
 
 ## Handling layout shift
 

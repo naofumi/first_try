@@ -2,6 +2,7 @@ import './App.css'
 import IndexPage from "./pages/IndexPage.jsx"
 import JewelryPage from "./pages/JewelryPage.jsx"
 import RestaurantsPage from "./pages/RestaurantsPage.jsx"
+import {StrictMode} from "react"
 
 /*
 * This is a basic router for the container application.
@@ -36,7 +37,7 @@ function TopNav() {
 
 function App() {
   return (
-    <>
+    <StrictMode>
       <div data-turbo="false" id="container">
         <div className="micro-frontend-label">Container Application</div>
         <TopNav/>
@@ -44,7 +45,7 @@ function App() {
           <Route path={window.location.pathname}/>
         </div>
       </div>
-    </>
+    </StrictMode>
   )
 }
 
